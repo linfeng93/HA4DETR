@@ -8,7 +8,7 @@ This implementation achieves a **8~150× speedup** on random inputs and a **3~10
 
 ## 🚀 Features
 
-- Supports batched assignment problems of shape (B × 300 × N)
+- Supports batched assignment problems of shape [B × 300 × N]
   - The maximum size of each cost matrix can be adjusted by updating `MAX_ROWS` and `MAX_COLS` in the CUDA source code before compiling
   - Each cost matrix can have a different size; pad to size N with INF values before stacking (N ≤ 300)
   - Uses `torch.float32` as the data type for cost matrices
@@ -51,7 +51,28 @@ This will:
 - Compare GPU results with SciPy CPU results
 - Report runtime speed-up statistics
 
-**2. Use in your own code:**
+You will see per-trial performance logs followed by average statistics across the last 10 runs. Example output:
+```log
+Mean valid ncols in cost matrix: 203.75
+GPU runtime      :    3.85 ms
+SciPy CPU runtime:   32.69 ms
+Speed-up         :    8.50 x
+
+Mean valid ncols in cost matrix: 164.62
+GPU runtime      :    3.23 ms
+SciPy CPU runtime:   29.52 ms
+Speed-up         :    9.13 x
+
+...
+...
+
+Average of the last 10 Loops
+GPU runtime      :    1.49 ms
+SciPy CPU runtime:   24.67 ms
+Speed-up         :   20.67 x
+```
+
+**2. Use in your own code**
 
 A simple example:
 
@@ -67,23 +88,11 @@ output = hungarian_gpu(cost, Ns)
 
 ---
 
-## 📁 Input Format for Real Data
+## 📊 Performance
 
-- Accepts `.npy` files containing cost tensors of shape `(B, 300, ≤300)`
-- Values > 1e5 are treated as ∞ and used for padding invalid columns
+We present a speed-up curve with respect to varying batch sizes (B), using randomly padded input cost matrices of shape [B × 300 × 300].
+> All experiments are conducted on a single NVIDIA RTX 4090 GPU.
 
----
-
-## 📊 Performance Example
-
-Tested on RTX 4090 with batch size = 16 and 300×300 cost matrices:
-
-```
-Average valid cols : 276.19
-GPU runtime         : 2.13 ms
-SciPy CPU runtime   : 60.72 ms
-Speed-up            : 28.52×
-```
 
 ---
 
