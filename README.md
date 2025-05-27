@@ -1,5 +1,9 @@
 # GPU-Accelerated Batched Hungarian Algorithm for DETR
 
+<p align="center">
+<img align="center" src="https://github.com/linfeng93/HA4DETR/blob/main/logo.jpg" width="width:200" height="200" alt="Intellifusion Logo">
+<p>
+
 This repository provides an efficient **CUDA/C++ extension** of the Hungarian Algorithm, seamlessly integrated with PyTorch and optimized for batched 300 × N (N ≤ 300) assignment problems—commonly encountered in the training of **DETR** and related models.
 
 Compared to the widely-used SciPy's CPU-based `linear_sum_assignment`, this implementation delivers a **8~160× speed-up** on random inputs and a **3~10× speed-up** in practical DETR training scenarios, evaluated on **NVIDIA RTX 4090 GPUs**.
