@@ -94,7 +94,7 @@ output = hungarian_gpu(cost, Ns)
 
 We present a speed-up curve with respect to varying batch sizes (B), using randomly padded input cost matrices of shape [B × 300 × 300]. Experiments are conducted on a single NVIDIA RTX 4090 GPU.
 
-![](https://github.com/linfeng93/HA4DETR/blob/main/speedup.png)
+<img src="https://github.com/linfeng93/HA4DETR/blob/main/speedup.png" style="width:70%; height:auto;">
 
 **2. Real-World Application**
 
