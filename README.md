@@ -1,8 +1,8 @@
 # GPU-Accelerated Batched Hungarian Algorithm for DETR
 
-This repository offers an efficient **CUDA + PyTorch C++ extension** implementation of the **Hungarian Algorithm** on GPU, optimized for batched 300×N (N ≤ 300) assignment problems—commonly encountered during the training of **DETR** and related models.
+This repository provides an efficient **CUDA/C++ extension** of the Hungarian Algorithm, seamlessly integrated with PyTorch and optimized for batched 300 × N (N ≤ 300) assignment problems—commonly encountered in the training of **DETR** and related models.
 
-This implementation achieves a **8~160× speedup** on random inputs and a **3~10×** speedup in practical DETR training scenarios, compared to the CPU-based `linear_sum_assignment` from SciPy, tested on **a single NVIDIA RTX 4090**.
+Compared to the widely-used SciPy's CPU-based `linear_sum_assignment`, this implementation delivers a **8~160× speed-up** on random inputs and a **3~10× speed-up** in practical DETR training scenarios, evaluated on **NVIDIA RTX 4090 GPUs**.
 
 ---
 
@@ -20,8 +20,8 @@ This implementation achieves a **8~160× speedup** on random inputs and a **3~10
   - Final assignment and write-out
 
 - Fully validated against SciPy's `linear_sum_assignment` in terms of:
-  - **Correctness**
-  - **Runtime performance**
+  - Correctness
+  - Runtime performance
 
 ---
 
@@ -98,7 +98,9 @@ We present a speed-up curve with respect to varying batch sizes (B), using rando
 
 **2. Real-World Application**
 
-We integrate this GPU-based Hungarian Algorithm into the DETR training pipeline by replacing SciPy's `linear_sum_assignment`. With a per-GPU batch size of 16 (each GPU processing its own local samples), this implementation achieves **a 3× speed-up**, leading to an overall **10%** reduction in training overhead. As batch size increases, the speed-up would become even more pronounced, consistent with the trends observed in random testing.
+We integrate this GPU-based Hungarian Algorithm into the DETR training pipeline by replacing SciPy's `linear_sum_assignment`.
+
+With a per-GPU batch size of 16 (each GPU processing its own local samples), this implementation achieves a **3× speed-up**, leading to an overall **10%** reduction in training overhead. As batch size increases, the speed-up would become even more pronounced, consistent with the trends observed in random testing.
 
 ---
 
