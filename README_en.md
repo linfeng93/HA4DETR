@@ -90,9 +90,15 @@ output = hungarian_gpu(cost, Ns)
 
 ## 📊 Performance
 
-We present a speed-up curve with respect to varying batch sizes (B), using randomly padded input cost matrices of shape [B × 300 × 300].
-> All experiments are conducted on a single NVIDIA RTX 4090 GPU.
+**1. Random Testing**
 
+We present a speed-up curve with respect to varying batch sizes (B), using randomly padded input cost matrices of shape [B × 300 × 300]. Experiments are conducted on a single NVIDIA RTX 4090 GPU.
+
+![](https://github.com/linfeng93/HA4DETR/blob/main/speedup.png)
+
+**2. Real-World Application**
+
+We integrate this GPU-based Hungarian Algorithm into the DETR training pipeline by replacing SciPy's `linear_sum_assignment`. With a per-GPU batch size of 16 (each GPU processing its own local samples), this implementation achieves **a 3× speed-up**, leading to an overall **10%** reduction in training overhead. As batch size increases, the speed-up would become even more pronounced, consistent with the trends observed in random testing.
 
 ---
 
