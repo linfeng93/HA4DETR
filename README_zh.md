@@ -95,6 +95,8 @@ output = hungarian_gpu(cost, Ns)
 
 我们展示了在不同批量大小 (B) 下的加速曲线，输入为随机填充的 [B × 300 × 300] 代价矩阵。实验均在单张 NVIDIA RTX 4090 GPU 上进行。
 
+> 对比基准: SciPy `linear_sum_assignment`
+
 <img src="https://github.com/linfeng93/HA4DETR/blob/main/speedup.png" style="width:70%; height:auto;">
 
 **2. 实际应用**
